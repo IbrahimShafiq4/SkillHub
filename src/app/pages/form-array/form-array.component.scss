@@ -1,0 +1,23 @@
+form label,
+form button,
+form h4 {
+    color: var(--card-label-color) !important;
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 600px;
+    }
+}
+
+@media (min-width: 767px) and (max-width: 991px) {
+    .container {
+        width: 500px;
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        width: 400px;
+    }
+}

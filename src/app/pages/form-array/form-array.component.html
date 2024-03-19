@@ -1,0 +1,97 @@
+<div class="container mt-5">
+    <form [formGroup]="developerForm" (ngSubmit)="onSubmit()">
+        <div class="mb-4">
+            <label for="selectBox" class="mb-1">You Are:</label>
+            <select name="selectBox" id="selectBox" class="form-select" formControlName="developer">
+                <option value="" selected="selected">Select</option>
+                <option value="FrontEnd Developer">FrontEnd Developer</option>
+                <option value="BackEnd Developer">BackEnd Developer</option>
+                <option value="Full Stack Developer">Full Stack Developer</option>
+            </select>
+        </div>
+
+        <h4 class="d-flex gap-2">Skills:
+            <button type="button" (click)="addSkill()"
+                class="btn btn-sm btn-success d-flex justify-content-center align-items-center">
+                <i class="bx bx-plus-circle bx-sm"></i>
+            </button>
+        </h4>
+
+        <div class="flex mb-3" formArrayName="skills">
+            @for (skill of skills.controls; track skill; let i = $index) {
+            <div class="row" [formGroupName]="i">
+                <div class="mb-sm-2 mb-md-2 col-xm-2 col-lg-6">
+                    <select class="form-select" formControlName="skill">
+                        <option value="">Select</option>
+                        @for (skillItem of skillList; track skillItem) {
+                        <option [value]="skillItem">{{skillItem}}</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-sm-2 mb-md-2 col-xm-2 col-lg-5">
+                    <input type="number" formControlName="experience" class="form-control" placeholder="Experience">
+                </div>
+                <div class="mb-sm-2 mb-md-2 col-xm-2 col-lg-1">
+                    <h4>
+                        <button type="button" (click)="onRemoveSkill(i, developerForm.get('developer')?.value)"
+                            class="btn btn-sm btn-danger d-flex justify-content-center align-items-center">
+                            <i class="bx bx-minus bx-sm"></i>
+                        </button>
+                    </h4>
+                </div>
+            </div>
+            }
+        </div>
+
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <button type="button" class="btn btn-success" (click)="addNew()">Add New</button>
+        </div>
+
+    </form>
+
+    @if (showCard) {
+        <div>
+            @for (option of chooseOption; track option; let i = $index) {
+                <div class="grid my-3">
+                    <div class="card">
+                        <h4>{{ option.major }}</h4>
+                        <p>
+                            Skills: 
+                            @for (item of option.majorSkills; track item) {
+                                <li> {{ item.skill }} - {{ item.experience }} </li>
+                            }
+                        </p>
+                        <div class="shine"></div>
+                        <div class="background">
+                            <div class="tiles">
+                                <div class="tile tile-1"></div>
+                                <div class="tile tile-2"></div>
+                                <div class="tile tile-3"></div>
+                                <div class="tile tile-4"></div>
+            
+                                <div class="tile tile-5"></div>
+                                <div class="tile tile-6"></div>
+                                <div class="tile tile-7"></div>
+                                <div class="tile tile-8"></div>
+            
+                                <div class="tile tile-9"></div>
+                                <div class="tile tile-10"></div>
+                            </div>
+            
+                            <div class="line line-1"></div>
+                            <div class="line line-2"></div>
+                            <div class="line line-3"></div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <label class="day-night">
+        <input type="checkbox" checked />
+        <div></div>
+    </label>
+</div>
